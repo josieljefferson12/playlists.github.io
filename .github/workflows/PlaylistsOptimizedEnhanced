@@ -1,0 +1,291 @@
+# .github/workflows/PlaylistsOptimizedEnhanced.yml
+# Nome do workflow que aparecerá na interface do GitHub Actions
+# Este nome será exibido na aba "Actions" do repositório
+name: "📋 Listas de Reprodução Otimizadas (Atualização Automática)"
+
+# Define os eventos que irão disparar a execução deste workflow
+on:
+  # Configuração do agendamento automático do workflow
+  schedule:
+  # Agenda a execução diária ao meia-noite (12:00) no horário UTC
+  # A sintaxe usa padrão cron com 5 campos (minuto hora dia mês dia-da-semana)
+    - cron: '0 3 * * *'
+      timezone: 'America/Fortaleza'  # Usa o mesmo fuso que Brasília (UTC-3)
+  # Explicação detalhada da sintaxe cron:
+  # - '0'    - no minuto 0 (em ponto)
+  # - '3'   - às 3 horas UTC (que equivalem a 0h em Fortaleza)
+  # - '*'    - todos os dias do mês
+  # - '*'    - todos os meses do ano
+  # - '*'    - todos os dias da semana (de domingo a sábado)
+  
+  # Observações importantes:
+  # 1. O horário é sempre em UTC (Tempo Universal Coordenado)
+  # 2. O GitHub pode atrasar em até 15 minutos a execução agendada
+  # 3. O workflow não será executado se não houver alterações no repositório,
+  #    a menos que você configure para rodar sempre
+
+  # Permite acionar manualmente o workflow através da interface do GitHub
+  # Aparecerá um botão "Run workflow" na interface Actions
+  workflow_dispatch:
+
+# Configura as permissões necessárias para este workflow
+permissions:
+  # Permissão para escrever no repositório (necessário para fazer commits)
+  # Nível de permissão: write (escrita)
+  contents: write
+
+# Lista de jobs (tarefas) que serão executados como parte deste workflow
+jobs:
+  # Primeiro job - responsável por baixar e processar as playlists
+  # Identificador modificado (sem emoji para evitar problemas)
+  download_playlists:
+    # Nome amigável que será exibido na interface (pode conter emoji)
+    name: "📥 Download e processamento"
+    
+    # Define o sistema operacional onde o job será executado
+    # ubuntu-latest = versão mais recente do Ubuntu disponível
+    runs-on: ubuntu-latest
+
+    # Lista de passos (etapas) que serão executados sequencialmente
+    steps:
+      # ================================
+      # Passo 1: Fazer checkout (clonar) do repositório
+      # ================================
+      - name: "🔽 Checkout do repositório"
+        # Usa a ação oficial do GitHub para checkout (versão 4)
+        uses: actions/checkout@v4
+        with:
+          # Configuração de segurança: não persistir credenciais
+          persist-credentials: false
+          # Baixa todo o histórico de commits (necessário para operações git posteriores)
+          # 0 = baixa todo o histórico
+          fetch-depth: 0
+
+      # ================================
+      # Passo 2: Configurar o ambiente Python
+      # ================================
+      - name: "🐍 Configurar Python"
+        # Usa a ação oficial de setup do Python (versão 4)
+        uses: actions/setup-python@v4
+        with:
+          # Define a versão específica do Python a ser usada (3.8)
+          python-version: '3.8'
+
+      # ================================
+      # Passo 3: Configurar cache para dependências pip
+      # ================================
+      # Isso acelera execuções futuras ao reutilizar pacotes já baixados
+      - name: "📦 Cache de dependências pip"
+        # Usa a ação oficial de cache (versão 3)
+        uses: actions/cache@v3
+        with:
+          # Caminho onde o pip armazena os pacotes baixados
+          path: ~/.cache/pip
+          # Chave única para o cache baseada em:
+          # - Sistema operacional (runner.os)
+          # - Hash do arquivo requirements.txt (se existir)
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          # Chaves alternativas para tentar restaurar o cache
+          # caso a chave principal não exista
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      # ================================
+      # Passo 4: Instalar dependências Python necessárias
+      # ================================
+      - name: "⚙️ Instalar dependências"
+        # Comandos que serão executados no shell
+        run: |
+          # Atualiza o pip para a versão mais recente
+          python -m pip install --upgrade pip
+          # Instala o pacote requests (necessário para os scripts)
+          pip install requests
+
+      # ================================
+      # Passo 5: Executar o primeiro script Python (playlists2.py)
+      # ================================
+      - name: "▶️ Executar playlists2.py"
+        # Comando para executar o script Python
+        run: python playlists2.py
+      
+      # ================================
+      # Passo 6: Executar o segundo script Python (playlists.py)
+      # ================================
+      - name: "▶️ Executar playlists.py"
+        run: python playlists.py
+      
+      # ================================
+      # Passo 7: Executar o terceiro script Python (Playlist.py)
+      # ================================
+      - name: "▶️ Executar Playlist.py"
+        run: python Playlist.py
+      
+      # ================================
+      # Passo 8: Adicionar timestamp nos arquivos gerados
+      # ================================
+      - name: "⏱️ Adicionar data/hora nos arquivos"
+        run: |
+          # Loop por todos os arquivos .m3u e .xml.gz no diretório raiz
+          # -maxdepth 1 = procura apenas no diretório atual
+          # -type f = apenas arquivos (não diretórios)
+          # -name "*.m3u" -o -name "*.xml.gz" = arquivos com essas extensões
+          for file in $(find . -maxdepth 1 -type f -name "*.m3u" -o -name "*.xml.gz"); do
+            # Adiciona um comentário com a data/hora atual:
+            # - TZ='America/Fortaleza' = define o fuso horário (BRT)
+            # date '+%d/%m/%Y - %H:%M:%S' = formato da data
+            # >> "$file" = adiciona ao final do arquivo
+            echo -e "\n\n# Atualizado em $(TZ='America/Fortaleza' date '+%d/%m/%Y - %H:%M:%S') BRT" >> "$file"
+          done
+
+      # ================================
+      # Passo 9: Verificar se houve alterações nos arquivos
+      # ================================
+      - name: "🔍 Verificar alterações no Git"
+        # Define um ID para referenciar este passo posteriormente
+        id: git_status
+        run: |
+          # Verifica se há mudanças não commitadas:
+          # git status --porcelain = formato simplificado para scripts
+          # O if verifica se a saída não está vazia (-n)
+          if [[ -n "$(git status --porcelain .)" ]]; then
+            # Se houver mudanças, define uma variável de ambiente 'changes' como true
+            # $GITHUB_ENV = arquivo especial onde variáveis de ambiente são definidas
+            echo "changes=true" >> $GITHUB_ENV
+          else
+            # Se não houver mudanças, define como false
+            echo "changes=false" >> $GITHUB_ENV
+          fi
+
+      # ================================
+      # Passo 10: Fazer commit e push das alterações (se houver mudanças)
+      # ================================
+      - name: "💾 Salvar alterações no GitHub"
+        # Condicional - só executa se houver mudanças (changes == 'true')
+        if: env.changes == 'true'
+        # Define variáveis de ambiente específicas para este passo
+        env:
+          # Usa um token de acesso pessoal armazenado nos secrets do repositório
+          # secrets.MY_PAGES_GITHUB_TOKEN = nome do segredo que contém o token
+          GITHUB_TOKEN: ${{ secrets.MY_PAGES_GITHUB_TOKEN }}
+        run: |
+          # Configura o usuário do git (necessário para fazer commits)
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Adiciona todos os arquivos modificados ao staging area
+          git add .
+          
+          # Cria um commit com uma mensagem padrão
+          git commit -m "🔄 Atualização automática dos arquivos baixados"
+          
+          # Faz pull das alterações remotas (se houver) para evitar conflitos
+          # --no-rebase = evita rebase automático
+          # || true = ignora erros (caso não haja alterações remotas)
+          git pull origin main --no-rebase || true
+          
+          # Faz push das alterações para o repositório:
+          # Usa o token de autenticação (GITHUB_TOKEN)
+          # ${{ github.repository }} = nome do repositório (ex: usuario/repo)
+          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git main
+
+      # ================================
+      # Passo 11: Listar arquivos gerados (útil para debug)
+      # ================================
+      - name: "📂 Listar arquivos gerados"
+        # Comando para listar todos os arquivos no diretório atual
+        # -la = formato longo, mostra todos os arquivos (incluindo ocultos)
+        run: ls -la
+
+      # ================================
+      # Passo 12: Mensagem de sucesso (executa apenas se todos os passos anteriores foram bem sucedidos)
+      # ================================
+      - name: "✅ Tudo certo!"
+        # Condicional - só executa se o workflow foi bem sucedido até este ponto
+        if: success()
+        # Simples mensagem no log
+        run: echo "Workflow executado com sucesso!"
+
+      # ================================
+      # Passo 13: Mensagem de falha (executa apenas se algum passo anterior falhou)
+      # ================================
+      - name: "❌ Ops, algo deu errado!"
+        # Condicional - só executa se houve falha em algum passo anterior
+        if: failure()
+        # Mensagem de erro no log
+        run: echo "Workflow falhou!"
+
+# .github/workflows/Playlists.yaml
+name: "📋 Listas de Reprodução Otimizadas (Atualização Automática)"
+
+on:
+  schedule:
+    - cron: '0 3 * * *'
+      timezone: 'America/Fortaleza'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  download_playlists:
+    name: "📥 Download e processamento"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "🔽 Checkout do repositório (com token)"
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: "🐍 Configurar Python"
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - name: "⚙️ Instalar dependências"
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: "▶️ Executar scripts"
+        run: |
+          python playlists2.py
+          python playlists.py
+          python Playlist.py
+
+      - name: "⏱️ Adicionar data/hora nos arquivos"
+        run: |
+          for file in $(find . -maxdepth 1 -type f -name "*.m3u" -o -name "*.xml.gz"); do
+            echo -e "\n\n# Atualizado em $(TZ='America/Fortaleza' date '+%d/%m/%Y - %H:%M:%S') BRT" >> "$file"
+          done
+
+      - name: "🔍 Verificar alterações"
+        id: check-changes
+        run: |
+          git status --porcelain
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "changes_detected=true" >> $GITHUB_OUTPUT
+          else
+            echo "changes_detected=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: "💾 Commit e push das alterações"
+        if: steps.check-changes.outputs.changes_detected == 'true'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "🔄 Atualização automática - $(date +'%d/%m/%Y %H:%M')"
+          git pull
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: "✅ Status final"
+        run: |
+          if [ "${{ steps.check-changes.outputs.changes_detected }}" = "true" ]; then
+            echo "Alterações foram commitadas e enviadas com sucesso!"
+          else
+            echo "Nenhuma alteração detectada - nada para commit."
+          fi
