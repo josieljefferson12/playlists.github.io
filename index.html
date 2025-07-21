@@ -372,6 +372,180 @@
       document.addEventListener('fileManagerLoaded', window.initFileManager);
     }
   });
+
+  // =================================================================
+  // Código adaptado do generate_metadata.js para funcionar no navegador
+  // =================================================================
+
+  // Configurações do projeto adaptadas para o navegador
+  const config = {
+    outputFile: 'files_metadata.json',
+    excludedFiles: [
+      'index.html',
+      'style.css',
+      'script.js',
+      '.gitlab-ci.yaml',
+      'files_metadata.json',
+      'generate_metadata.js',
+      'package.json',
+      'package-lock.json',
+      '.gitlab-ci.yml',
+      '.gitignore',
+      'Gemfile',
+      '_config.yml',
+      'README.md',
+      'playlists.py',
+      'playlists.m3u.py',
+      'requirements.txt',
+      'playlists.log',
+      'Gemfile.lock'
+    ],
+    githubUser: 'josieljefferson12',
+    githubRepo: 'playlists.github.io',
+    branch: 'main' // No navegador, não temos acesso a CI_COMMIT_REF_NAME
+  };
+
+  // Cache para armazenar tamanhos de arquivo já formatados
+  const sizeCache = new Map();
+
+  /**
+   * Formata o tamanho do arquivo de forma legível para humanos
+   * @param {number} bytes - Tamanho do arquivo em bytes
+   * @returns {string} Tamanho formatado (ex: "4.20 MB")
+   */
+  function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    
+    if (sizeCache.has(bytes)) {
+      return sizeCache.get(bytes);
+    }
+
+    const units = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+    const unitIndex = Math.floor(Math.log(bytes) / Math.log(1024));
+    const formattedSize = parseFloat((bytes / Math.pow(1024, unitIndex)).toFixed(2)) + ' ' + units[unitIndex];
+
+    sizeCache.set(bytes, formattedSize);
+    return formattedSize;
+  }
+
+  /**
+   * Formata a data no padrão brasileiro com fuso horário de Fortaleza (UTC-3)
+   * @param {Date} date - Objeto de data JavaScript
+   * @returns {string} Data formatada (ex: "21/07/2023 - 15:30:45.123 (UTC-3)")
+   */
+  function formatDate(date) {
+    const pad = (num, digits = 2) => num.toString().padStart(digits, '0');
+    
+    // Ajusta para o fuso horário de Fortaleza (UTC-3)
+    const timezoneOffset = -3 * 60; // -3 horas em minutos
+    const adjustedDate = new Date(date.getTime() + (timezoneOffset * 60 * 1000));
+    
+    return [
+      `${pad(adjustedDate.getDate())}/${pad(adjustedDate.getMonth() + 1)}/${adjustedDate.getFullYear()}`,
+      `${pad(adjustedDate.getHours())}:${pad(adjustedDate.getMinutes())}:${pad(adjustedDate.getSeconds())}.${pad(adjustedDate.getMilliseconds(), 3)}`,
+      '(UTC-3)'
+    ].join(' - ');
+  }
+
+  // Mapeamento de extensões de arquivo para tipos MIME
+  const MIME_TYPES = {
+    txt: 'text/plain',
+    pdf: 'application/pdf',
+    png: 'image/png',
+    jpg: 'image/jpeg',
+    jpeg: 'image/jpeg',
+    gif: 'image/gif',
+    mp3: 'audio/mpeg',
+    mp4: 'video/mp4',
+    m3u: 'audio/x-mpegurl',
+    m3u8: 'application/x-mpegURL'
+  };
+
+  /**
+   * Obtém o tipo MIME baseado na extensão do arquivo
+   * @param {string} extension - Extensão do arquivo (sem o ponto)
+   * @returns {string} Tipo MIME correspondente
+   */
+  function getMimeType(extension) {
+    return MIME_TYPES[extension.toLowerCase()] || 'application/octet-stream';
+  }
+
+  /**
+   * Função para buscar metadados dos arquivos via API (simulando o comportamento do Node.js)
+   * No navegador, precisamos buscar os metadados de um arquivo JSON pré-gerado
+   */
+  async function fetchFilesMetadata() {
+    try {
+      const response = await fetch(config.outputFile);
+      if (!response.ok) {
+        throw new Error('Erro ao carregar metadados dos arquivos');
+      }
+      return await response.json();
+    } catch (error) {
+      console.error('Erro ao buscar metadados:', error);
+      return [];
+    }
+  }
+
+  /**
+   * Função principal adaptada para o navegador
+   * Em vez de gerar os metadados, busca do arquivo JSON
+   */
+  async function initFileManager() {
+    try {
+      console.log('⏳ Carregando metadados dos arquivos...');
+      
+      // Busca os metadados do arquivo JSON
+      const filesMetadata = await fetchFilesMetadata();
+      
+      // Atualiza as estatísticas
+      document.getElementById('total-files').textContent = filesMetadata.length;
+      
+      const totalSize = filesMetadata.reduce((sum, file) => sum + file.sizeInBytes, 0);
+      document.getElementById('total-size').textContent = formatFileSize(totalSize);
+      
+      if (filesMetadata.length > 0) {
+        const lastUpdate = new Date(Math.max(...filesMetadata.map(f => new Date(f.lastModifiedTimestamp)));
+        document.getElementById('last-update').textContent = formatDate(lastUpdate);
+      }
+      
+      // Esconde o indicador de carregamento
+      document.getElementById('loading').style.display = 'none';
+      
+      console.log(`✅ Metadados carregados. Total de arquivos: ${filesMetadata.length}`);
+      
+      // Aqui você pode adicionar a lógica para exibir os arquivos na lista
+      // Por exemplo:
+      const fileList = document.getElementById('file-list');
+      filesMetadata.forEach(file => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <div class="file-item">
+            <span class="file-icon"><i class="fas fa-file"></i></span>
+            <span class="file-name">${file.name}</span>
+            <span class="file-size">${file.size}</span>
+            <span class="file-date">${file.lastModified}</span>
+            <a href="${file.downloadUrl}" class="download-btn" download>
+              <i class="fas fa-download"></i> Download
+            </a>
+          </div>
+        `;
+        fileList.appendChild(li);
+      });
+      
+    } catch (error) {
+      console.error('❌ Erro ao inicializar o gerenciador de arquivos:', error);
+      document.getElementById('loading').innerHTML = `
+        <div class="error-message">
+          <i class="fas fa-exclamation-triangle"></i>
+          <p>Erro ao carregar a lista de arquivos. Por favor, recarregue a página.</p>
+        </div>
+      `;
+    }
+  }
+
+  // Expõe a função para ser chamada quando o DOM estiver pronto
+  window.initFileManager = initFileManager;
   </script>
 </body>
-    </html>
+  </html>
