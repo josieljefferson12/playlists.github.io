@@ -1,82 +1,112 @@
 [
   {
-    "name": "PiauiTV.m3u",
-    "path": "PiauiTV.m3u",
-    "size": 76895,
-    "lastModified": "2025-07-21T15:48:49.543Z",
-    "download_url": "https://raw.githubusercontent.com/josieljefferson12/playlists.github.io/main/PiauiTV.m3u",
-    "file_type": "m3u"
-  },
-  {
     "name": "epgbrasil.m3u",
     "path": "epgbrasil.m3u",
-    "size": 639055,
-    "lastModified": "2025-07-21T15:48:49.544Z",
-    "download_url": "https://raw.githubusercontent.com/josieljefferson12/playlists.github.io/main/epgbrasil.m3u",
-    "file_type": "m3u"
+    "size": "624.08 KB",
+    "sizeInBytes": 639055,
+    "lastModified": "21/07/2025 - 13:11:37.594 - (UTC-3)",
+    "lastModifiedTimestamp": 1753114297594,
+    "downloadUrl": "https://raw.githubusercontent.com/ josieljefferson12/playlists.github.io/main/epgbrasil.m3u",
+    "fileType": "m3u",
+    "mimeType": "audio/x-mpegurl"
   },
   {
     "name": "epgbrasil.xml.gz",
     "path": "epgbrasil.xml.gz",
-    "size": 771566,
-    "lastModified": "2025-07-21T15:48:49.547Z",
-    "download_url": "https://raw.githubusercontent.com/josieljefferson12/playlists.github.io/main/epgbrasil.xml.gz",
-    "file_type": "gz"
+    "size": "753.48 KB",
+    "sizeInBytes": 771566,
+    "lastModified": "21/07/2025 - 13:11:37.597 - (UTC-3)",
+    "lastModifiedTimestamp": 1753114297597,
+    "downloadUrl": "https://raw.githubusercontent.com/ josieljefferson12/playlists.github.io/main/epgbrasil.xml.gz",
+    "fileType": "gz",
+    "mimeType": "application/octet-stream"
   },
   {
     "name": "epgbrasilportugal.m3u",
     "path": "epgbrasilportugal.m3u",
-    "size": 6877,
-    "lastModified": "2025-07-21T15:48:49.547Z",
-    "download_url": "https://raw.githubusercontent.com/josieljefferson12/playlists.github.io/main/epgbrasilportugal.m3u",
-    "file_type": "m3u"
+    "size": "6.72 KB",
+    "sizeInBytes": 6877,
+    "lastModified": "21/07/2025 - 13:11:37.597 - (UTC-3)",
+    "lastModifiedTimestamp": 1753114297597,
+    "downloadUrl": "https://raw.githubusercontent.com/ josieljefferson12/playlists.github.io/main/epgbrasilportugal.m3u",
+    "fileType": "m3u",
+    "mimeType": "audio/x-mpegurl"
   },
   {
     "name": "epgbrasilportugal.xml.gz",
     "path": "epgbrasilportugal.xml.gz",
-    "size": 111773,
-    "lastModified": "2025-07-21T15:48:49.547Z",
-    "download_url": "https://raw.githubusercontent.com/josieljefferson12/playlists.github.io/main/epgbrasilportugal.xml.gz",
-    "file_type": "gz"
+    "size": "109.15 KB",
+    "sizeInBytes": 111773,
+    "lastModified": "21/07/2025 - 13:11:37.597 - (UTC-3)",
+    "lastModifiedTimestamp": 1753114297597,
+    "downloadUrl": "https://raw.githubusercontent.com/ josieljefferson12/playlists.github.io/main/epgbrasilportugal.xml.gz",
+    "fileType": "gz",
+    "mimeType": "application/octet-stream"
   },
   {
     "name": "epgportugal.m3u",
     "path": "epgportugal.m3u",
-    "size": 2262392,
-    "lastModified": "2025-07-21T15:48:49.554Z",
-    "download_url": "https://raw.githubusercontent.com/josieljefferson12/playlists.github.io/main/epgportugal.m3u",
-    "file_type": "m3u"
+    "size": "2.16 MB",
+    "sizeInBytes": 2262392,
+    "lastModified": "21/07/2025 - 13:11:37.604 - (UTC-3)",
+    "lastModifiedTimestamp": 1753114297604,
+    "downloadUrl": "https://raw.githubusercontent.com/ josieljefferson12/playlists.github.io/main/epgportugal.m3u",
+    "fileType": "m3u",
+    "mimeType": "audio/x-mpegurl"
   },
   {
     "name": "epgportugal.xml.gz",
     "path": "epgportugal.xml.gz",
-    "size": 1993130,
-    "lastModified": "2025-07-21T15:48:49.561Z",
-    "download_url": "https://raw.githubusercontent.com/josieljefferson12/playlists.github.io/main/epgportugal.xml.gz",
-    "file_type": "gz"
+    "size": "1.9 MB",
+    "sizeInBytes": 1993130,
+    "lastModified": "21/07/2025 - 13:11:37.610 - (UTC-3)",
+    "lastModifiedTimestamp": 1753114297610,
+    "downloadUrl": "https://raw.githubusercontent.com/ josieljefferson12/playlists.github.io/main/epgportugal.xml.gz",
+    "fileType": "gz",
+    "mimeType": "application/octet-stream"
   },
   {
     "name": "m3u@proton.me.m3u",
     "path": "m3u@proton.me.m3u",
-    "size": 4700423,
-    "lastModified": "2025-07-21T15:48:49.575Z",
-    "download_url": "https://raw.githubusercontent.com/josieljefferson12/playlists.github.io/main/m3u@proton.me.m3u",
-    "file_type": "m3u"
+    "size": "4.48 MB",
+    "sizeInBytes": 4700423,
+    "lastModified": "21/07/2025 - 13:11:37.625 - (UTC-3)",
+    "lastModifiedTimestamp": 1753114297625,
+    "downloadUrl": "https://raw.githubusercontent.com/ josieljefferson12/playlists.github.io/main/m3u@proton.me.m3u",
+    "fileType": "m3u",
+    "mimeType": "audio/x-mpegurl"
+  },
+  {
+    "name": "PiauiTV.m3u",
+    "path": "PiauiTV.m3u",
+    "size": "75.09 KB",
+    "sizeInBytes": 76895,
+    "lastModified": "21/07/2025 - 13:11:37.592 - (UTC-3)",
+    "lastModifiedTimestamp": 1753114297592,
+    "downloadUrl": "https://raw.githubusercontent.com/ josieljefferson12/playlists.github.io/main/PiauiTV.m3u",
+    "fileType": "m3u",
+    "mimeType": "audio/x-mpegurl"
   },
   {
     "name": "playlist.m3u",
     "path": "playlist.m3u",
-    "size": 7727,
-    "lastModified": "2025-07-21T15:48:49.575Z",
-    "download_url": "https://raw.githubusercontent.com/josieljefferson12/playlists.github.io/main/playlist.m3u",
-    "file_type": "m3u"
+    "size": "7.55 KB",
+    "sizeInBytes": 7727,
+    "lastModified": "21/07/2025 - 13:11:37.625 - (UTC-3)",
+    "lastModifiedTimestamp": 1753114297625,
+    "downloadUrl": "https://raw.githubusercontent.com/ josieljefferson12/playlists.github.io/main/playlist.m3u",
+    "fileType": "m3u",
+    "mimeType": "audio/x-mpegurl"
   },
   {
     "name": "pornstars.m3u",
     "path": "pornstars.m3u",
-    "size": 95321,
-    "lastModified": "2025-07-21T15:48:49.591Z",
-    "download_url": "https://raw.githubusercontent.com/josieljefferson12/playlists.github.io/main/pornstars.m3u",
-    "file_type": "m3u"
+    "size": "93.09 KB",
+    "sizeInBytes": 95321,
+    "lastModified": "21/07/2025 - 13:11:37.642 - (UTC-3)",
+    "lastModifiedTimestamp": 1753114297642,
+    "downloadUrl": "https://raw.githubusercontent.com/ josieljefferson12/playlists.github.io/main/pornstars.m3u",
+    "fileType": "m3u",
+    "mimeType": "audio/x-mpegurl"
   }
 ]
