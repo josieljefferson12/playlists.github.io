@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="system">
+<head>
+  <!-- Metadados básicos otimizados -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Página de downloads de arquivos mantida por Josiel Jefferson">
+  <meta name="keywords" content="downloads, arquivos, Josiel Jefferson, projetos">
+  <meta name="author" content="Josiel Jefferson">
+  
+  <!-- Metadados Open Graph melhorados -->
+  <meta property="og:title" content="Josiel Jefferson - Página de Downloads">
+  <meta property="og:description" content="Acesse diversos arquivos para download mantidos por Josiel Jefferson">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://seusite.com">
+  <meta property="og:image" content="https://seusite.com/imagem-compartilhamento.jpg">
+  
+  <!-- Configuração de tema otimizada -->
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
+  
+  <title>Josiel Jefferson - Downloads</title>
+  
+  <!-- Pré-carregamento otimizado -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://github.com" crossorigin>
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+  <link rel="preload" href="style.css" as="style">
+  <link rel="preload" href="script.js" as="script">
+  
+  <!-- Carregamento de fontes com fallback robusto -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+  
+  <!-- CSS crítico otimizado -->
+  <style>
+    /* Variáveis CSS modernizadas com fallbacks */
+    :root {
+      color-scheme: light dark;
+      --primary-color: #2563eb;
+      --primary-hover: #1d4ed8;
+      --text-color: #1e293b;
+      --text-color-dark: #f1f5f9;
+      --bg-color: #ffffff;
+      --bg-color-dark: #0f172a;
+      --border-color: #e2e8f0;
+      --border-color-dark: #334155;
+      --card-bg: #f8fafc;
+      --card-bg-dark: #1e293b;
+      --transition: 0.2s ease;
+    }
+    
+    [data-theme="dark"] {
+      --primary-color: #3b82f6;
+      --primary-hover: #60a5fa;
+      --text-color: var(--text-color-dark);
+      --bg-color: var(--bg-color-dark);
+      --border-color: var(--border-color-dark);
+      --card-bg: var(--card-bg-dark);
+    }
+    
+    /* Reset moderno com melhor acessibilidade */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    /* Base estilizada para melhor legibilidade */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, 
+                   Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      color: var(--text-color);
+      background-color: var(--bg-color);
+      transition: background-color var(--transition), color var(--transition);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Melhorias no cabeçalho */
+    header, footer {
+      padding: clamp(1rem, 2vw, 1.5rem);
+      text-align: center;
+    }
+    
+    header {
+      border-bottom: 1px solid var(--border-color);
+      background-color: var(--card-bg);
+    }
+    
+    h1 {
+      font-size: clamp(1.5rem, 3vw, 1.8rem);
+      margin-bottom: 0.5rem;
+    }
+    
+    .subtitle {
+      color: color-mix(in srgb, var(--text-color) 70%, transparent);
+      font-size: 0.9rem;
+    }
+    
+    /* Indicador de carregamento aprimorado */
+    #loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      gap: 1rem;
+    }
+    
+    .spinner {
+      border: 4px solid rgba(0, 0, 0, 0.1);
+      border-radius: 50%;
+      border-top: 4px solid var(--primary-color);
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* Layout responsivo básico para containers */
+    .container {
+      width: min(100% - 2rem, 1200px);
+      margin-inline: auto;
+    }
+  </style>
+  
+  <!-- CSS principal carregado de forma otimizada -->
+  <link rel="stylesheet" href="style.css" media="all">
+</head>
+<body>
+  <!-- Cabeçalho semântico melhorado -->
+  <header role="banner">
+    <div class="container">
+      <h1>📁 ARQUIVOS PARA DOWNLOAD</h1>
+      <p class="subtitle">Projeto josielluz no GitHub</p>
+    </div>
+  </header>
+
+  <!-- Conteúdo principal semântico -->
+  <main id="main-content" role="main" class="container">
+    <!-- Estatísticas com melhor semântica -->
+    <section aria-labelledby="stats-heading" class="stats-section">
+      <h2 id="stats-heading" class="visually-hidden">Estatísticas dos Arquivos</h2>
+      <div id="stats-container" class="stats-container">
+        <div class="stat-card">
+          <div class="stat-value" id="total-files" aria-live="polite">0</div>
+          <div class="stat-label">Arquivos</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="total-size" aria-live="polite">0 MB</div>
+          <div class="stat-label">Tamanho Total</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="last-update" aria-live="polite">-</div>
+          <div class="stat-label">Última Atualização</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Barra de pesquisa acessível -->
+    <section aria-labelledby="search-heading" class="search-section">
+      <h2 id="search-heading" class="visually-hidden">Pesquisar Arquivos</h2>
+      <div class="search-container">
+        <label for="search" class="visually-hidden">Pesquisar arquivos</label>
+        <input type="search" id="search" placeholder="Pesquisar arquivos..." 
+               aria-label="Pesquisar arquivos" autocomplete="off">
+      </div>
+    </section>
+
+    <!-- Controles de interface melhorados -->
+    <section aria-labelledby="controls-heading" class="controls-section">
+      <h2 id="controls-heading" class="visually-hidden">Controles da Lista</h2>
+      <div class="controls">
+        <div class="control-group">
+          <label for="sort">Ordenar por:</label>
+          <select id="sort" aria-label="Ordenar arquivos">
+            <option value="name">Nome (A-Z)</option>
+            <option value="nameDesc">Nome (Z-A)</option>
+            <option value="date">Data (Mais recentes)</option>
+            <option value="dateOldest">Data (Mais antigo)</option>
+            <option value="size">Tamanho (Maior)</option>
+            <option value="sizeSmallest">Tamanho (Menor)</option>
+            <option value="type">Tipo (A-Z)</option>
+            <option value="typeDesc">Tipo (Z-A)</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label for="items-per-page">Itens por página:</label>
+          <select id="items-per-page" aria-label="Itens por página">
+            <option value="10">10</option>
+            <option value="20" selected>20</option>
+            <option value="30">30</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label for="theme">Tema:</label>
+          <select id="theme" aria-label="Escolher tema">
+            <option value="light">Claro</option>
+            <option value="dark">Escuro</option>
+            <option value="system" selected>Sistema</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Indicador de carregamento acessível -->
+    <div id="loading" class="loading" aria-live="polite" aria-busy="true">
+      <div class="spinner" aria-hidden="true"></div>
+      <p>Carregando lista de arquivos...</p>
+    </div>
+
+    <!-- Lista de arquivos semântica -->
+    <section aria-labelledby="files-heading" class="files-section">
+      <h2 id="files-heading" class="visually-hidden">Lista de Arquivos</h2>
+      <div id="file-list-container">
+        <ul id="file-list" aria-live="polite" role="list"></ul>
+      </div>
+    </section>
+
+    <!-- Paginação melhorada -->
+    <nav aria-labelledby="pagination-heading" class="pagination-section">
+      <h2 id="pagination-heading" class="visually-hidden">Navegação de Páginas</h2>
+      <div id="pagination-container" class="pagination-container">
+        <div id="pagination-controls" class="pagination-controls"></div>
+        <div id="pagination-info" class="pagination-info" aria-live="polite"></div>
+      </div>
+    </nav>
+  </main>
+
+  <!-- Rodapé semântico melhorado -->
+  <footer role="contentinfo">
+    <div class="container">
+      <p>Projeto mantido por <a href="https://github.com/josieljluz" target="_blank" rel="noopener noreferrer">Josiel Jefferson</a></p>
+      
+      <!-- Links sociais acessíveis -->
+      <div class="social-links" aria-label="Redes sociais">
+        <a href="https://github.com/josieljluz" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub (abre em nova janela)">
+          <i class="fab fa-github" aria-hidden="true"></i>
+        </a>
+        <a href="https://gitlab.com/josieljluz" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitLab (abre em nova janela)">
+          <i class="fab fa-gitlab" aria-hidden="true"></i>
+        </a>
+        <a href="https://wa.me/+5589981073340" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="WhatsApp (abre em nova janela)">
+          <i class="fab fa-whatsapp" aria-hidden="true"></i>
+        </a>
+        <a href="https://t.me/ElectronSpeedX" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Telegram (abre em nova janela)">
+          <i class="fab fa-telegram" aria-hidden="true"></i>
+        </a>
+        <a href="https://facebook.com/josieljeff" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook (abre em nova janela)">
+          <i class="fab fa-facebook-f" aria-hidden="true"></i>
+        </a>
+        <a href="https://instagram.com/josieljeff" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram (abre em nova janela)">
+          <i class="fab fa-instagram" aria-hidden="true"></i>
+        </a>
+        <a href="https://twitter.com/josieljeff" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Twitter (abre em nova janela)">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.threads.net/@josieljeff" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Threads (abre em nova janela)">
+          <i class="fab fa-threads" aria-hidden="true"></i>
+        </a>
+        <a href="https://tiktok.com/@josieljeff" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="TikTok (abre em nova janela)">
+          <i class="fab fa-tiktok" aria-hidden="true"></i>
+        </a>
+        <a href="https://linkedin.com/in/josieljeff" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn (abre em nova janela)">
+          <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+        </a>
+        <a href="mailto:josiel@example.com" class="social-link" aria-label="Enviar e-mail">
+          <i class="fas fa-envelope" aria-hidden="true"></i>
+        </a>
+        <a href="https://x.com/josieljeff" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="X (Twitter) (abre em nova janela)">
+          <i class="fab fa-x-twitter" aria-hidden="true"></i>
+        </a>
+      </div>
+      
+      <!-- Informação de build com data dinâmica -->
+      <p class="build-info">Última atualização: <time id="build-date" datetime=""></time></p>
+    </div>
+  </footer>
+  
+  <!-- Scripts otimizados -->
+  <script src="script.js" defer></script>
+  <script>
+  /**
+   * Função principal para inicialização otimizada
+   */
+  document.addEventListener('DOMContentLoaded', () => {
+    // Configuração do tema aprimorada
+    const setupTheme = () => {
+      const getSystemTheme = () => 
+        window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      
+      const applyTheme = (theme) => {
+        document.documentElement.setAttribute('data-theme', 
+          theme === 'system' ? getSystemTheme() : theme);
+      };
+      
+      const savedTheme = localStorage.getItem('theme') || 'system';
+      applyTheme(savedTheme);
+      
+      // Atualiza o select
+      const themeSelect = document.getElementById('theme');
+      if (themeSelect) {
+        themeSelect.value = savedTheme;
+        themeSelect.addEventListener('change', (e) => {
+          localStorage.setItem('theme', e.target.value);
+          applyTheme(e.target.value);
+        });
+      }
+      
+      // Observa mudanças no tema do sistema
+      window.matchMedia('(prefers-color-scheme: dark)')
+        .addEventListener('change', () => {
+          if (localStorage.getItem('theme') === 'system') {
+            applyTheme('system');
+          }
+        });
+    };
+    
+    // Atualização de datas otimizada
+    const setupDates = () => {
+      const formatDate = (date) => 
+        new Intl.DateTimeFormat('pt-BR', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false
+        }).format(date).replace(',', ' -');
+      
+      const updateDates = () => {
+        const now = new Date();
+        const formattedDate = formatDate(now);
+        
+        document.querySelectorAll('[data-date]').forEach(el => {
+          el.textContent = formattedDate;
+          if (el.tagName === 'TIME') {
+            el.setAttribute('datetime', now.toISOString());
+          }
+        });
+      };
+      
+      updateDates();
+      setInterval(updateDates, 1000);
+    };
+    
+    // Inicialização dos módulos
+    setupTheme();
+    setupDates();
+    
+    // Carrega o conteúdo principal
+    if (window.initFileManager) {
+      window.initFileManager();
+    } else {
+      document.addEventListener('fileManagerLoaded', window.initFileManager);
+    }
+  });
+  </script>
+</body>
+</html>
