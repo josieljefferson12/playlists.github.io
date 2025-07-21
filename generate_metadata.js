@@ -30,33 +30,6 @@ const config = {
   branch: process.env.CI_COMMIT_REF_NAME || 'main' // Branch atual (usa variável de ambiente ou 'main' como padrão)
 };
 
-/**
- * Função para listar arquivos localmente
- * @returns {Array} Array de objetos com metadados dos arquivos
- */
-function getLocalFiles() {
-  // Lê todos os arquivos e diretórios no diretório atual
-  const allFiles = fs.readdirSync('.', { withFileTypes: true });
-
-  // Filtra e mapeia os arquivos
-  return allFiles
-    // Filtra apenas arquivos (ignora diretórios)
-    .filter(dirent => dirent.isFile())
-    // Obtém apenas os nomes dos arquivos
-    .map(dirent => dirent.name)
-    // Remove arquivos que estão na lista de exclusão
-    .filter(file => !config.excludedFiles.includes(file))
-    // Mapeia cada arquivo para um objeto com suas informações
-    .map(file => ({
-      name: file, // Nome do arquivo
-      path: file, // Caminho do arquivo (relativo)
-      size: fs.statSync(file).size, // Tamanho em bytes
-      lastModified: fs.statSync(file).mtime.toISOString(), // Data de modificação em ISO
-      download_url: `https://raw.githubusercontent.com/${config.githubUser}/${config.githubRepo}/${config.branch}/${file}`, // URL para download
-      file_type: path.extname(file).toLowerCase().replace('.', '') || 'file' // Tipo de arquivo (extensão)
-    }));
-}
-
 // Cache para armazenar tamanhos de arquivo já formatados (melhora performance)
 const sizeCache = new Map();
 
@@ -132,7 +105,34 @@ function getMimeType(extension) {
 }
 
 /**
- * Obtém metadados detalhados dos arquivos locais
+ * Função para listar arquivos localmente (usada para todos os arquivos EXCETO o arquivo de saída)
+ * @returns {Array} Array de objetos com metadados dos arquivos
+ */
+function getLocalFiles() {
+  // Lê todos os arquivos e diretórios no diretório atual
+  const allFiles = fs.readdirSync('.', { withFileTypes: true });
+
+  // Filtra e mapeia os arquivos
+  return allFiles
+    // Filtra apenas arquivos (ignora diretórios)
+    .filter(dirent => dirent.isFile())
+    // Obtém apenas os nomes dos arquivos
+    .map(dirent => dirent.name)
+    // Remove arquivos que estão na lista de exclusão
+    .filter(file => !config.excludedFiles.includes(file))
+    // Mapeia cada arquivo para um objeto com suas informações
+    .map(file => ({
+      name: file, // Nome do arquivo
+      path: file, // Caminho do arquivo (relativo)
+      size: fs.statSync(file).size, // Tamanho em bytes
+      lastModified: fs.statSync(file).mtime.toISOString(), // Data de modificação em ISO
+      download_url: `https://raw.githubusercontent.com/ ${config.githubUser}/${config.githubRepo}/${config.branch}/${file}`, // URL para download
+      file_type: path.extname(file).toLowerCase().replace('.', '') || 'file' // Tipo de arquivo (extensão)
+    }));
+}
+
+/**
+ * Obtém metadados detalhados dos arquivos locais (incluindo formatação para exibição)
  * @returns {Array} Array de objetos com metadados completos dos arquivos
  */
 function getLocalFilesMetadata() {
@@ -158,7 +158,7 @@ function getLocalFilesMetadata() {
           sizeInBytes: stats.size, // Tamanho em bytes (para ordenação)
           lastModified: formatDate(stats.mtime), // Data formatada
           lastModifiedTimestamp: stats.mtime.getTime(), // Timestamp (para ordenação)
-          downloadUrl: `https://raw.githubusercontent.com/${config.githubUser}/${config.githubRepo}/${config.branch}/${file}`, // URL de download
+          downloadUrl: `https://raw.githubusercontent.com/ ${config.githubUser}/${config.githubRepo}/${config.branch}/${file}`, // URL de download
           fileType: extension, // Tipo de arquivo (extensão)
           mimeType: getMimeType(extension) // Tipo MIME
         };
@@ -180,7 +180,7 @@ function generateMetadata() {
     console.log('⏳ Iniciando geração de metadados...');
 
     // Obtém os metadados dos arquivos
-    const filesMetadata = getLocalFiles();
+    const filesMetadata = getLocalFilesMetadata();
 
     // Escreve o arquivo JSON com os metadados
     fs.writeFileSync(
@@ -195,7 +195,7 @@ function generateMetadata() {
     // Lista os arquivos incluídos (para debug)
     console.log('📝 Arquivos incluídos:');
     filesMetadata.forEach(file => {
-      console.log(`- ${file.name} (${file.file_type})`);
+      console.log(`- ${file.name} (${file.fileType})`);
     });
 
   } catch (error) {
