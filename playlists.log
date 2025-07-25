@@ -1158,3 +1158,68 @@
 2025-07-25 01:01:00,813 - INFO - Sucesso: /home/runner/work/playlists.github.io/playlists.github.io/epgbrasilportugal.xml.gz (110604 bytes)
 2025-07-25 01:01:00,813 - INFO - Hash MD5: e8b35d0014bdfb78ad8ff891725dc576
 2025-07-25 01:01:00,814 - INFO - Downloads concluídos.
+2025-07-25 03:59:00,535 - INFO - Iniciando processo de download para playlists...
+2025-07-25 03:59:00,538 - INFO - Tentativa 1/3: Baixando http://m3u4u.com/m3u/3wk1y24kx7uzdevxygz7
+2025-07-25 03:59:00,538 - INFO - Tentativa 1/3: Baixando http://m3u4u.com/m3u/jq2zy9epr3bwxmgwyxr5
+2025-07-25 03:59:00,539 - INFO - Tentativa 1/3: Baixando http://m3u4u.com/m3u/782dyqdrqkh1xegen4zp
+2025-07-25 03:59:00,541 - INFO - Tentativa 1/3: Baixando https://gitlab.com/josieljefferson12/playlists/-/raw/main/PiauiTV.m3u
+2025-07-25 03:59:00,545 - INFO - Tentativa 1/3: Baixando https://gitlab.com/josieljefferson12/playlists/-/raw/main/m3u4u_proton.me.m3u
+2025-07-25 03:59:00,841 - INFO - Sucesso: /home/runner/work/playlists.github.io/playlists.github.io/playlists/PiauiTV.m3u | Tamanho: 76851 bytes | Hash: ed19d1bee8112f753504aab432876025
+2025-07-25 03:59:00,841 - INFO - Tentativa 1/3: Baixando https://gitlab.com/josieljefferson12/playlists/-/raw/main/playlist.m3u
+2025-07-25 03:59:00,863 - INFO - Sucesso: /home/runner/work/playlists.github.io/playlists.github.io/playlists/m3u@proton.me.m3u | Tamanho: 4700379 bytes | Hash: 17e34181bba3a93ed726df4bc76b9a9c
+2025-07-25 03:59:00,863 - INFO - Tentativa 1/3: Baixando https://gitlab.com/josieljefferson12/playlists/-/raw/main/pornstars.m3u
+2025-07-25 03:59:01,267 - INFO - Sucesso: /home/runner/work/playlists.github.io/playlists.github.io/playlists/pornstars.m3u | Tamanho: 99363 bytes | Hash: 2dd9ebf69ff86f288d8e593b3a8f2402
+2025-07-25 03:59:01,267 - INFO - Tentativa 1/3: Baixando http://m3u4u.com/epg/3wk1y24kx7uzdevxygz7
+2025-07-25 03:59:01,292 - INFO - Sucesso: /home/runner/work/playlists.github.io/playlists.github.io/playlists/playlist.m3u | Tamanho: 8079 bytes | Hash: 9cd23f01f6f2ddf69cc4f333aa6d42e7
+2025-07-25 03:59:01,292 - INFO - Tentativa 1/3: Baixando http://m3u4u.com/epg/jq2zy9epr3bwxmgwyxr5
+2025-07-25 03:59:01,604 - INFO - Sucesso: /home/runner/work/playlists.github.io/playlists.github.io/playlists/epgbrasilportugal.m3u | Tamanho: 6833 bytes | Hash: 2b8d239a20f299fbb89cf6cc8933170f
+2025-07-25 03:59:01,605 - INFO - Tentativa 1/3: Baixando http://m3u4u.com/epg/782dyqdrqkh1xegen4zp
+2025-07-25 03:59:01,623 - INFO - Sucesso: /home/runner/work/playlists.github.io/playlists.github.io/playlists/epgbrasil.m3u | Tamanho: 639011 bytes | Hash: b45a4ecb7e9e16b774d737233baa4560
+2025-07-25 03:59:01,634 - INFO - Sucesso: /home/runner/work/playlists.github.io/playlists.github.io/playlists/epgportugal.m3u | Tamanho: 2262348 bytes | Hash: fce788edd736f5407b18f61966f41949
+2025-07-25 03:59:02,312 - INFO - Sucesso: /home/runner/work/playlists.github.io/playlists.github.io/playlists/epgbrasil.xml.gz | Tamanho: 750424 bytes | Hash: e5111e2caaabad85dd0a861c57b9749b
+2025-07-25 03:59:03,308 - INFO - Sucesso: /home/runner/work/playlists.github.io/playlists.github.io/playlists/epgbrasilportugal.xml.gz | Tamanho: 110604 bytes | Hash: e8b35d0014bdfb78ad8ff891725dc576
+2025-07-25 03:59:03,468 - INFO - Sucesso: /home/runner/work/playlists.github.io/playlists.github.io/playlists/epgportugal.xml.gz | Tamanho: 1974809 bytes | Hash: b62127706a2a99c7f2b84db846d5680e
+2025-07-25 03:59:03,469 - INFO - Todos os downloads foram concluídos com sucesso!
+2025-07-25 03:59:03,612 - INFO - Removendo arquivos antigos...
+2025-07-25 03:59:03,613 - INFO - Removido: m3u@proton.me.m3u
+2025-07-25 03:59:03,613 - INFO - Removido: pornstars.m3u
+2025-07-25 03:59:03,614 - INFO - Removido: epgbrasilportugal.m3u
+2025-07-25 03:59:03,614 - INFO - Removido: epgbrasil.xml.gz
+2025-07-25 03:59:03,614 - INFO - Removido: epgportugal.m3u
+2025-07-25 03:59:03,614 - INFO - Removido: epgbrasilportugal.xml.gz
+2025-07-25 03:59:03,615 - INFO - Removido: epgbrasil.m3u
+2025-07-25 03:59:03,615 - INFO - Removido: epgportugal.xml.gz
+2025-07-25 03:59:03,615 - INFO - Removido: playlist.m3u
+2025-07-25 03:59:03,615 - INFO - Removido: PiauiTV.m3u
+2025-07-25 03:59:03,615 - INFO - Iniciando downloads...
+2025-07-25 03:59:03,616 - INFO - Tentativa 1 de 3: Baixando de: http://m3u4u.com/m3u/3wk1y24kx7uzdevxygz7
+2025-07-25 03:59:03,616 - INFO - Tentativa 1 de 3: Baixando de: http://m3u4u.com/m3u/jq2zy9epr3bwxmgwyxr5
+2025-07-25 03:59:03,617 - INFO - Tentativa 1 de 3: Baixando de: http://m3u4u.com/m3u/782dyqdrqkh1xegen4zp
+2025-07-25 03:59:03,617 - INFO - Tentativa 1 de 3: Baixando de: https://gitlab.com/josieljefferson12/playlists/-/raw/main/PiauiTV.m3u
+2025-07-25 03:59:03,623 - INFO - Tentativa 1 de 3: Baixando de: https://gitlab.com/josieljefferson12/playlists/-/raw/main/m3u4u_proton.me.m3u
+2025-07-25 03:59:03,863 - INFO - Sucesso: /home/runner/work/playlists.github.io/playlists.github.io/PiauiTV.m3u (76851 bytes)
+2025-07-25 03:59:03,864 - INFO - Hash MD5: ed19d1bee8112f753504aab432876025
+2025-07-25 03:59:03,864 - INFO - Tentativa 1 de 3: Baixando de: https://gitlab.com/josieljefferson12/playlists/-/raw/main/playlist.m3u
+2025-07-25 03:59:04,063 - INFO - Sucesso: /home/runner/work/playlists.github.io/playlists.github.io/m3u@proton.me.m3u (4700379 bytes)
+2025-07-25 03:59:04,072 - INFO - Hash MD5: 17e34181bba3a93ed726df4bc76b9a9c
+2025-07-25 03:59:04,072 - INFO - Tentativa 1 de 3: Baixando de: https://gitlab.com/josieljefferson12/playlists/-/raw/main/pornstars.m3u
+2025-07-25 03:59:04,152 - INFO - Sucesso: /home/runner/work/playlists.github.io/playlists.github.io/playlist.m3u (8079 bytes)
+2025-07-25 03:59:04,152 - INFO - Hash MD5: 9cd23f01f6f2ddf69cc4f333aa6d42e7
+2025-07-25 03:59:04,152 - INFO - Tentativa 1 de 3: Baixando de: http://m3u4u.com/epg/3wk1y24kx7uzdevxygz7
+2025-07-25 03:59:04,288 - INFO - Sucesso: /home/runner/work/playlists.github.io/playlists.github.io/pornstars.m3u (99363 bytes)
+2025-07-25 03:59:04,289 - INFO - Hash MD5: 2dd9ebf69ff86f288d8e593b3a8f2402
+2025-07-25 03:59:04,289 - INFO - Tentativa 1 de 3: Baixando de: http://m3u4u.com/epg/jq2zy9epr3bwxmgwyxr5
+2025-07-25 03:59:04,442 - INFO - Sucesso: /home/runner/work/playlists.github.io/playlists.github.io/epgbrasilportugal.m3u (6833 bytes)
+2025-07-25 03:59:04,442 - INFO - Hash MD5: 2b8d239a20f299fbb89cf6cc8933170f
+2025-07-25 03:59:04,442 - INFO - Tentativa 1 de 3: Baixando de: http://m3u4u.com/epg/782dyqdrqkh1xegen4zp
+2025-07-25 03:59:04,786 - INFO - Sucesso: /home/runner/work/playlists.github.io/playlists.github.io/epgbrasil.m3u (639011 bytes)
+2025-07-25 03:59:04,787 - INFO - Hash MD5: b45a4ecb7e9e16b774d737233baa4560
+2025-07-25 03:59:05,331 - INFO - Sucesso: /home/runner/work/playlists.github.io/playlists.github.io/epgportugal.m3u (2262348 bytes)
+2025-07-25 03:59:05,335 - INFO - Hash MD5: fce788edd736f5407b18f61966f41949
+2025-07-25 03:59:05,451 - INFO - Sucesso: /home/runner/work/playlists.github.io/playlists.github.io/epgbrasilportugal.xml.gz (110604 bytes)
+2025-07-25 03:59:05,452 - INFO - Hash MD5: e8b35d0014bdfb78ad8ff891725dc576
+2025-07-25 03:59:05,830 - INFO - Sucesso: /home/runner/work/playlists.github.io/playlists.github.io/epgportugal.xml.gz (1974809 bytes)
+2025-07-25 03:59:05,833 - INFO - Hash MD5: b62127706a2a99c7f2b84db846d5680e
+2025-07-25 03:59:05,945 - INFO - Sucesso: /home/runner/work/playlists.github.io/playlists.github.io/epgbrasil.xml.gz (750424 bytes)
+2025-07-25 03:59:05,947 - INFO - Hash MD5: e5111e2caaabad85dd0a861c57b9749b
+2025-07-25 03:59:05,947 - INFO - Downloads concluídos.
